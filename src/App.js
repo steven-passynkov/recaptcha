@@ -1,13 +1,15 @@
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
-import reCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function App() {
   const [isLogedin, setIsLogin] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const recaptchaRef = React.createRef();
 
   function handleSubmitLogin() {
     if (username === "a senior engineer" && password === "steven") {
@@ -38,7 +40,6 @@ function App() {
                   onChange={(event) => setUsername(event.target.value)}
                 />
               </Form.Group>
-
               <Form.Group>
                 <Form.Label>Who is steven?</Form.Label>
                 <Form.Control
@@ -47,7 +48,17 @@ function App() {
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </Form.Group>
-
+              <form
+                onSubmit={() => {
+                  recaptchaRef.current.execute();
+                }}
+              >
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey="6Lfg54kkAAAAANTA3Z-fCWvBS9VG8Y0sm2wnDpvC"
+                  onChange={() => console.log()}
+                />
+              </form>
               <Button
                 variant="primary"
                 className="mt-3"
