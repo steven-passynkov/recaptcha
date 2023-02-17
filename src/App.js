@@ -11,11 +11,12 @@ function App() {
 
   const captchaRef = useRef(null);
 
-  const handleSubmit = (e) =>{
-        e.preventDefault();
-        const token = captchaRef.current.getValue();
-        captchaRef.current.reset();
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const token = captchaRef.current.getValue();
+    captchaRef.current.reset();
+    console.log(token);
+  };
 
   function handleSubmitLogin() {
     if (username === "steven" && password === "the best") {
@@ -54,7 +55,7 @@ function App() {
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </Form.Group>
-              <form onSubmit={handleSubmit} style={{paddingTop:"8px"}}>
+              <form onSubmit={handleSubmit} style={{ paddingTop: "8px" }}>
                 <ReCAPTCHA
                   ref={captchaRef}
                   sitekey="6Lc6hI8kAAAAAEl56rbd1EVV_Pqz-EteDR_yaawU"
