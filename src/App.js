@@ -54,7 +54,7 @@ function App() {
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </Form.Group>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} style={{paddingTop:"8px"}}>
                 <ReCAPTCHA
                   ref={captchaRef}
                   sitekey="6Lc6hI8kAAAAAEl56rbd1EVV_Pqz-EteDR_yaawU"
