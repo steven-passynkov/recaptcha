@@ -18,7 +18,7 @@ function App() {
     }
 
   function handleSubmitLogin() {
-    if (username === "a senior engineer" && password === "steven") {
+    if (username === "steven" && password === "the best") {
       setIsLogin(true);
     }
   }
