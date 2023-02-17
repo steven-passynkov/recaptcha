@@ -1,8 +1,9 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 import ReCAPTCHA from "react-google-recaptcha";
+import Reaptcha from "reaptcha";
 
 function App() {
   const [isLogedin, setIsLogin] = useState(false);
@@ -11,11 +12,20 @@ function App() {
 
   const captchaRef = useRef(null);
 
+  const [captchaToken, setCaptchaToken] = useState(null);
+
+  console.log(captchaToken);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const token = captchaRef.current.getValue();
     captchaRef.current.reset();
-    console.log(token);
+  };
+
+  const verify = () => {
+    captchaRef.current.getResponse().then((res) => {
+      setCaptchaToken(res);
+    });
   };
 
   function handleSubmitLogin() {
@@ -55,11 +65,22 @@ function App() {
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </Form.Group>
+
+              {/*
               <form onSubmit={handleSubmit} style={{ paddingTop: "8px" }}>
                 <ReCAPTCHA
                   ref={captchaRef}
                   sitekey="6Lc6hI8kAAAAAEl56rbd1EVV_Pqz-EteDR_yaawU"
                   onChange={() => console.log()}
+                />
+              </form>
+              */}
+
+              <form onSubmit={handleSubmit}>
+                <Reaptcha
+                  sitekey="6Lc6hI8kAAAAAEl56rbd1EVV_Pqz-EteDR_yaawU"
+                  ref={captchaRef}
+                  onVerify={verify}
                 />
               </form>
               <Button
