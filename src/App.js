@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
@@ -9,7 +9,13 @@ function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const recaptchaRef = React.createRef();
+  const captchaRef = useRef(null);
+
+  const handleSubmit = (e) =>{
+        e.preventDefault();
+        const token = captchaRef.current.getValue();
+        captchaRef.current.reset();
+    }
 
   function handleSubmitLogin() {
     if (username === "a senior engineer" && password === "steven") {
@@ -48,14 +54,10 @@ function App() {
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </Form.Group>
-              <form
-                onSubmit={() => {
-                  recaptchaRef.current.execute();
-                }}
-              >
+              <form onSubmit={handleSubmit}>
                 <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey="6Lfg54kkAAAAANTA3Z-fCWvBS9VG8Y0sm2wnDpvC"
+                  ref={captchaRef}
+                  sitekey="6Lc6hI8kAAAAAEl56rbd1EVV_Pqz-EteDR_yaawU"
                   onChange={() => console.log()}
                 />
               </form>
