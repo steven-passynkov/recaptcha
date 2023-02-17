@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
