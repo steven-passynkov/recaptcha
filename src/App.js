@@ -2,7 +2,6 @@ import { useState, useCallback, useRef } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
-import ReCAPTCHA from "react-google-recaptcha";
 import Reaptcha from "reaptcha";
 
 function App() {
@@ -13,8 +12,6 @@ function App() {
   const captchaRef = useRef(null);
 
   const [captchaToken, setCaptchaToken] = useState(null);
-
-  console.log(captchaToken);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,18 +62,7 @@ function App() {
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </Form.Group>
-
-              {/*
               <form onSubmit={handleSubmit} style={{ paddingTop: "8px" }}>
-                <ReCAPTCHA
-                  ref={captchaRef}
-                  sitekey="6Lc6hI8kAAAAAEl56rbd1EVV_Pqz-EteDR_yaawU"
-                  onChange={() => console.log()}
-                />
-              </form>
-              */}
-
-              <form onSubmit={handleSubmit}>
                 <Reaptcha
                   sitekey="6Lc6hI8kAAAAAEl56rbd1EVV_Pqz-EteDR_yaawU"
                   ref={captchaRef}
